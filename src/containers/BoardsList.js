@@ -2,18 +2,27 @@ import { connect } from 'react-redux'
 
 import { BoardsView } from '../components'
 
-import { addBoard } from '../actions'
+import {
+  addBoard,
+  editBoard,
+  setEditBoardId,
+  deleteBoard
+} from '../actions'
 
 const mapStateToProps = (state) => {
-  const { boards } = state.boards
+  const { boards, editBoardId } = state.boards
 
   return {
-    boards
+    boards,
+    editBoardId
   }
 }
 
 const BoardsList = connect(mapStateToProps, {
-  addBoard
+  addBoard,
+  editBoard,
+  setEditBoardId,
+  deleteBoard
 })(BoardsView)
 
 export { BoardsList }

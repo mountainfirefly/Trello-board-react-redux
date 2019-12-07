@@ -1,5 +1,6 @@
 export const ADD_BOARD = 'add_board'
 export const EDIT_BOARD = 'edit_board'
+export const SET_EDIT_BOARD_ID = 'set_edit_board'
 export const DELETE_BOARD = 'delete_board'
 export const ADD_TASK = 'add_task'
 export const EDIT_TASK = 'edit_task'

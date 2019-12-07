@@ -1,12 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const AddBoard = (props) => {
-  const [name, setName] = useState()
+  const { editBoardId, boards } = props
+  const [name, setName] = useState('')
 
+  const getBoard = (id) => {
+    return boards.find((board) => {
+      return board.id === id
+    }) || {}
+  }
   const onSubmit = () => {
-    props.addBoard(name)
+    if (editBoardId) {
+      const toBeEditBoard = getBoard(editBoardId)
+
+      props.editBoard({
+        ...toBeEditBoard,
+        name
+      })
+    } else {
+      props.addBoard(name)
+    }
+
     setName('')
   }
+
+  useEffect(() => {
+    if (editBoardId) {
+      const toBeEditBoard = getBoard(editBoardId)
+
+      setName(toBeEditBoard.name)
+    }
+  }, [editBoardId])
 
   return (
     <div>
@@ -22,7 +46,7 @@ const AddBoard = (props) => {
           }
         }}
       />
-      <button onClick={onSubmit}>Add Board</button>
+      <button onClick={onSubmit}>{editBoardId ? 'Edit' : 'Add' } Board</button>
     </div>
   )
 }

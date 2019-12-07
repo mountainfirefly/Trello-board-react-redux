@@ -1,7 +1,8 @@
-import { ADD_BOARD, EDIT_BOARD, DELETE_BOARD } from '../actions/types'
+import { ADD_BOARD, EDIT_BOARD, DELETE_BOARD, SET_EDIT_BOARD_ID } from '../actions/types'
 
 const INITIAL_STATE = {
-  boards: []
+  boards: [],
+  editBoardId: ''
 }
 
 const BoardsReducer = (state = INITIAL_STATE, action) => {
@@ -23,7 +24,8 @@ const BoardsReducer = (state = INITIAL_STATE, action) => {
           }
 
           return board
-        })
+        }),
+        editBoardId: ''
       }
     case DELETE_BOARD:
       return {
@@ -31,6 +33,11 @@ const BoardsReducer = (state = INITIAL_STATE, action) => {
         boards: state.boards.filter((board) => {
           return board.id !== action.value
         })
+      }
+    case SET_EDIT_BOARD_ID:
+      return {
+        ...state,
+        editBoardId: action.value
       }
     default:
       return state
